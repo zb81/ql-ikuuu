@@ -1,6 +1,6 @@
 const axios = require('axios')
 const { initInstance, getEnv } = require('./qlApi.js')
-const notify = require('../sendNotify')
+const notify = require('./sendNotify')
 
 const infoURL = 'https://ikuuu.pw/user'
 const trafficReg = /(今日已用\n.*\s)(\d+\.?\d*)[M|G]B/

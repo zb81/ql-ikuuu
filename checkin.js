@@ -1,6 +1,6 @@
 const axios = require('axios')
 const { initInstance, getEnv } = require('./qlApi.js')
-const notify = require('../sendNotify')
+const notify = require('./sendNotify')
 
 const checkinURL = 'https://ikuuu.pw/user/checkin'
 
