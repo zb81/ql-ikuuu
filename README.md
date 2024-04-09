@@ -1,4 +1,4 @@
-# iKuuu
+# ql-ikuuu
 
 青龙脚本，iKuuu VPN 签到、获取今日使用流量。
 
@@ -21,7 +21,7 @@
 ### 第四步：添加订阅
 
 ```sh
-ql repo https://github.com/zb81/ikuuu.git "checkin|traffic" "" "qlApi"
+ql repo https://github.com/zb81/ql-ikuuu.git "checkin|traffic" "" "qlApi"
 ```
 
 添加订阅后在定时任务中执行：
