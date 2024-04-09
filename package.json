@@ -1,0 +1,10 @@
+{
+  "name": "ikuuu",
+  "version": "1.0.0",
+  "private": "true",
+  "description": "iKuuu VPN 签到、今日流量",
+  "author": "Zhu Bei <hi@zb81.icu>",
+  "dependencies": {
+    "axios": "^1.6.8"
+  }
+}
