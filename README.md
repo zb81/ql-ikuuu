@@ -6,7 +6,7 @@
 
 ### 第一步：获取 cookie
 
-<img alt="picture 0" src="https://cdn.zb81.icu/7ab20c9677eb12cc96eff09fcab7ff893013300b37917a2f1671d6754f45af27.png" width="500" />  
+<img alt="picture 0" src="https://cdn.zb81.icu/7ab20c9677eb12cc96eff09fcab7ff893013300b37917a2f1671d6754f45af27.png" />  
 
 ### 第二步：添加环境变量
 
