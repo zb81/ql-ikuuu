@@ -21,7 +21,7 @@
 ### 第四步：添加订阅
 
 ```sh
-ql repo https://github.com/zb81/ql-ikuuu.git "checkin|traffic" "" "qlApi"
+ql repo https://github.com/zb81/ql-ikuuu.git "checkin|traffic" "" "qlApi|utils"
 ```
 
 添加订阅后在定时任务中执行：
