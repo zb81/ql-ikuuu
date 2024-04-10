@@ -1,7 +1,6 @@
 const axios = require('axios')
-const { getCookie } = require('./utils')
+const { getCookie, getTraffic } = require('./utils')
 const notify = require('./sendNotify')
-const { getTraffic } = require('./traffic')
 
 const checkinURL = 'https://ikuuu.pw/user/checkin'
 
@@ -24,7 +23,11 @@ async function checkin(cookie) {
 
 (async () => {
   const cookie = await getCookie()
-  const message = await checkin(cookie)
+
+  let message = await checkin(cookie)
+  message += '\n\n'
   const traffic = await getTraffic(cookie)
-  await notify.sendNotify(`iKuuu VPN 签到通知`, [message, ...traffic].join('\n'))
+  message += traffic.join('\n')
+
+  await notify.sendNotify(`iKuuu VPN 签到通知`, message)
 })()
