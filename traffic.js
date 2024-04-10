@@ -1,41 +1,29 @@
 const axios = require('axios')
-const { initInstance, getEnv } = require('./qlApi.js')
+const { getCookie } = require('./utils')
 const notify = require('./sendNotify')
 
 const infoURL = 'https://ikuuu.pw/user'
-const trafficReg = /(今日已用\n.*\s)(\d+\.?\d*)[M|G]B/
-
-/** 获取 cookie */
-async function getCookie() {
-  let instance = null
-  try {
-    instance = await initInstance()
-  } catch (e) { }
-
-  let cookie = process.env.IKUUU_COOKIE || []
-  try {
-    if (instance) cookie = await getEnv(instance, 'IKUUU_COOKIE')
-  } catch (e) { }
-
-  if (!cookie) {
-    console.log('未获取到 cookie, 程序终止')
-    process.exit(1)
-  }
-
-  return cookie
-}
+const todayTrafficReg = /今日已用\n.*\s(\d+\.?\d*)([M|G]B)/
+const restTrafficReg = /剩余流量[\s\S]*<span class="counter">(\d+\.?\d*)<\/span> ([M|G]B)/
 
 /** 获取今日已用流量 */
 async function getTraffic(cookie) {
   try {
-    const res = await axios(infoURL, {
+    const { data } = await axios(infoURL, {
       method: 'GET',
       headers: {
         Cookie: cookie
       },
       withCredentials: true
     })
-    return trafficReg.exec(res.data)[0].replace(/[\n|\s]/g, '').replace(/:/, ': ')
+
+    const [, today, todayUnit] = data.match(todayTrafficReg)
+    const [, rest, restUnit] = data.match(restTrafficReg)
+
+    return [
+      `今日已用: ${today}${todayUnit}`,
+      `剩余流量: ${rest}${restUnit}`
+    ]
   } catch (err) {
     console.log(err)
     process.exit(1)
@@ -44,6 +32,8 @@ async function getTraffic(cookie) {
 
 (async () => {
   const cookie = await getCookie()
-  const message = await getTraffic(cookie)
-  await notify.sendNotify(`iKuuu VPN 今日流量统计`, message)
+  const arr = await getTraffic(cookie)
+  await notify.sendNotify(`iKuuu VPN 今日流量统计`, arr.join('\n'))
 })()
+
+module.exports = { getTraffic }
