@@ -2,6 +2,10 @@
 
 青龙脚本，iKuuu VPN 签到、获取今日使用流量。
 
+> 注意：iKuuu cookie 有效期为一周，请在一周内更新 `IKUUU_COOKIE` 环境变量。
+>
+> 是否可行：刷新 cookie ?
+
 ## 如何使用
 
 ### 第一步：获取 cookie
