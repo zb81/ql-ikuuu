@@ -2,21 +2,14 @@
 
 青龙脚本，iKuuu VPN 签到、获取今日使用流量。
 
-> 注意：iKuuu cookie 有效期为一周，请在一周内更新 `IKUUU_COOKIE` 环境变量。
->
-> 是否可行：刷新 cookie ?
-
 ## 如何使用
 
-### 第一步：获取 cookie
+### 第一步：添加邮箱、密码到环境变量
 
-<img alt="picture 0" src="https://cdn.zb81.icu/7ab20c9677eb12cc96eff09fcab7ff893013300b37917a2f1671d6754f45af27.png" />  
+打开青龙面板，创建 `IKUUU_EMAIL` 和 `IKUUU_PWD` 变量。
 
-### 第二步：添加环境变量
+ <img alt="picture 0" src="https://cdn.zb81.icu/163bc6f247b4f29418ee9b07ac584934d9fd476304a6661240531aec98e1903d.png" />  
 
-打开青龙面板，创建 `IKUUU_COOKIE` 变量，粘贴刚刚获取的 cookie 。
-
-<img alt="picture 1" src="https://cdn.zb81.icu/9f8c548774819df773483785905169aa21adb9a4836d06af0af8eb8c4276eaac.png" />  
 
 ### 第三步：添加依赖项
 
