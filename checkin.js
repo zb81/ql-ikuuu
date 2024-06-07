@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { getCookie, getTraffic } = require('./utils')
+const { getCookie, getTraffic, getEmailAndPwdList } = require('./utils')
 const notify = require('./sendNotify')
 
 const checkinURL = 'https://ikuuu.pw/user/checkin'
@@ -21,13 +21,27 @@ async function checkin(cookie) {
   }
 }
 
-(async () => {
-  const cookie = await getCookie()
+async function run() {
+  const [emailList, pwdList] = await getEmailAndPwdList()
+  const messages = []
+  for (let i = 0; i < emailList.length; i++) {
+    const email = emailList[i]
+    const pwd = pwdList[i]
+    let msg = `邮箱：${emailList[i]}`
+    const cookie = await getCookie(email, pwd)
+    if (cookie.includes('登录失败')) {
+      msg += `\n${cookie}`
+      messages.push(msg)
+      continue
+    }
+    const checkinRes = await checkin(cookie)
+    msg += `\n${checkinRes}`
+    const arr = await getTraffic(cookie)
+    msg += `\n${arr.join('\n')}`
+    messages.push(msg)
+  }
 
-  let message = await checkin(cookie)
-  message += '\n\n'
-  const traffic = await getTraffic(cookie)
-  message += traffic.join('\n')
+  await notify.sendNotify(`iKuuu VPN 签到通知`, messages.join('\n\n========================\n\n'))
+}
 
-  await notify.sendNotify(`iKuuu VPN 签到通知`, message)
-})()
+run()

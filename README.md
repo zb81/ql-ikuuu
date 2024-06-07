@@ -6,9 +6,14 @@
 
 ### 第一步：添加邮箱、密码到环境变量
 
-打开青龙面板，创建 `IKUUU_EMAIL` 和 `IKUUU_PWD` 变量。
+打开青龙面板，创建 `IKUUU_EMAIL` 和 `IKUUU_PWD` 变量，多个邮箱或密码请换行。
 
- <img alt="picture 0" src="https://cdn.zb81.icu/163bc6f247b4f29418ee9b07ac584934d9fd476304a6661240531aec98e1903d.png" />  
+> 注意：邮箱和密码数量必须一致且一一对应。
+
+<img alt="picture 1" src="https://cdn.zb81.icu/95635412513591a0f93dd1b6c96662a8fc1a6b5dc86a13a24ef0d17660af73d1.png" />  
+
+<img alt="picture 2" src="https://cdn.zb81.icu/8ebbee42e5fe546ae7d18efcb83ab4f6411b2317aa141db671eec74290d1dd38.png" />  
+
 
 
 ### 第三步：添加依赖项
@@ -27,7 +32,8 @@ ql repo https://github.com/zb81/ql-ikuuu.git "checkin|traffic" "" "qlApi|utils"
 
 ## 通知效果
 
-<img alt="picture 0" src="https://cdn.zb81.icu/8027e8dbec62f99119e65edf308998762bf0697bda34cc6d561320961e5dd7bb.jpg" />  
+<img alt="picture 3" src="https://cdn.zb81.icu/cdcb0c957db045c6b5b383d78814f8ce8a4a8ce7775911b4a3450abfeafc3b1e.jpg" />  
+
 
 ## 原理
 

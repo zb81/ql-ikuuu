@@ -6,44 +6,72 @@ const infoURL = 'https://ikuuu.pw/user'
 const todayTrafficReg = /今日已用\n.*\s(\d+\.?\d*)([M|G]B)/
 const restTrafficReg = /剩余流量[\s\S]*<span class="counter">(\d+\.?\d*)<\/span> ([M|G]B)/
 
-/** 获取邮箱和密码 */
-async function getEmailAndPwd() {
+function extractArr(envStr) {
+  if (typeof envStr === 'string') {
+    envStr = envStr.trim()
+  }
+
+  if (Array.isArray(envStr)) {
+    return envStr
+  } else if (envStr.includes('\n')) {
+    return envStr.split('\n').map(v => v.trim()).filter(Boolean)
+  }
+  return [envStr]
+}
+
+/** 获取邮箱和密码数组 */
+async function getEmailAndPwdList() {
   let instance = null
   try {
     instance = await initInstance()
   } catch (e) { }
 
-  let email = process.env.IKUUU_EMAIL
-  let pwd = process.env.IKUUU_PWD
+  let emailEnv = process.env.IKUUU_EMAIL || []
+  let pwdEnv = process.env.IKUUU_PWD || []
+
   try {
     if (instance) {
-      email = await getEnv(instance, 'IKUUU_EMAIL')
-      pwd = await getEnv(instance, 'IKUUU_PWD')
+      emailEnv = await getEnv(instance, 'IKUUU_EMAIL')
+      pwdEnv = await getEnv(instance, 'IKUUU_PWD')
     }
-  } catch (e) { }
+  } catch { }
 
-  if (!email || !pwd) {
+  const emailList = extractArr(emailEnv)
+  const pwdList = extractArr(pwdEnv)
+
+  const emailLen = emailList.length
+  const pwdLen = pwdList.length
+
+  if (!emailLen || !pwdLen) {
     console.log('未获取到邮箱和密码, 程序终止')
     process.exit(1)
   }
 
-  console.log('✅ 成功读取环境变量')
+  if (emailLen !== pwdLen) {
+    console.log('邮箱和密码数量不一致, 程序终止')
+    process.exit(1)
+  }
 
-  return [email, pwd]
+  console.log(`✅ 成功读取 ${emailLen} 对邮箱和密码`)
+
+  return [emailList, pwdList]
 }
 
 /** 登录获取 cookie */
-async function getCookie() {
-  const [email, pwd] = await getEmailAndPwd()
+async function getCookie(email, pwd) {
   const formData = new FormData()
   formData.append('email', email)
   formData.append('passwd', pwd)
-  const res = await axios(loginURL, {
-    method: 'POST',
-    data: formData
-  })
-  console.log('✅ 登录成功！')
-  return res.headers['set-cookie'].join('; ')
+  try {
+    const res = await axios(loginURL, {
+      method: 'POST',
+      data: formData
+    })
+    if (res.data.ret === 0) {
+      return `❌ 登录失败：${res.data.msg}`
+    }
+    return res.headers['set-cookie'].join('; ')
+  } catch { }
 }
 
 /** 获取流量 */
@@ -70,4 +98,4 @@ async function getTraffic(cookie) {
   }
 }
 
-module.exports = { getCookie, getTraffic }
+module.exports = { getCookie, getTraffic, getEmailAndPwdList }
