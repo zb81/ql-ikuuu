@@ -3,8 +3,8 @@ const axios = require('axios')
 
 const loginURL = 'https://ikuuu.pw/auth/login'
 const infoURL = 'https://ikuuu.pw/user'
-const todayTrafficReg = /今日已用\n.*\s(\d+\.?\d*)([M|G]B)/
-const restTrafficReg = /剩余流量[\s\S]*<span class="counter">(\d+\.?\d*)<\/span> ([M|G]B)/
+const todayTrafficReg = /今日已用\n.*\s(\d+\.?\d*)([M|G]?B)/
+const restTrafficReg = /剩余流量[\s\S]*<span class="counter">(\d+\.?\d*)<\/span> ([M|G]?B)/
 
 function extractArr(envStr) {
   if (typeof envStr === 'string') {
@@ -70,6 +70,7 @@ async function getCookie(email, pwd) {
     if (res.data.ret === 0) {
       return `❌ 登录失败：${res.data.msg}`
     }
+    console.log(`✅ 登录成功：${email}`)
     return res.headers['set-cookie'].join('; ')
   } catch { }
 }
@@ -85,8 +86,14 @@ async function getTraffic(cookie) {
       withCredentials: true
     })
 
-    const [, today, todayUnit] = data.match(todayTrafficReg)
-    const [, rest, restUnit] = data.match(restTrafficReg)
+    const trafficRes = data.match(todayTrafficReg)
+    const restRes = data.match(restTrafficReg)
+    if (!trafficRes || !restRes) {
+      return ['查询流量失败，请检查正则和用户页面 HTML 结构']
+    }
+
+    const [, today, todayUnit] = trafficRes
+    const [, rest, restUnit] = restRes
 
     return [
       `今日已用：${today} ${todayUnit}`,
