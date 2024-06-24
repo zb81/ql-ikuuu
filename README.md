@@ -14,13 +14,11 @@
 
 <img alt="picture 2" src="https://cdn.zb81.icu/8ebbee42e5fe546ae7d18efcb83ab4f6411b2317aa141db671eec74290d1dd38.png" />  
 
-
-
-### 第三步：添加依赖项
+### 第二步：添加依赖项
 
 <img alt="picture 2" src="https://cdn.zb81.icu/4c687674b765dcba0b1333532db886485e8de0d9d06d7578c4122c3e7024056e.png" />  
 
-### 第四步：添加订阅
+### 第三步：添加订阅
 
 ```sh
 ql repo https://github.com/zb81/ql-ikuuu.git "checkin|traffic" "" "qlApi|utils"
