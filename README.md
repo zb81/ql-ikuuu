@@ -10,13 +10,13 @@
 
 > 注意：邮箱和密码数量必须一致且一一对应。
 
-<img alt="picture 1" src="https://cdn.zb81.icu/95635412513591a0f93dd1b6c96662a8fc1a6b5dc86a13a24ef0d17660af73d1.png" />  
+<img alt="env-email" src="./screenshots/env-email.png" />  
 
-<img alt="picture 2" src="https://cdn.zb81.icu/8ebbee42e5fe546ae7d18efcb83ab4f6411b2317aa141db671eec74290d1dd38.png" />  
+<img alt="env-pwd" src="./screenshots/env-pwd.png" />  
 
 ### 第二步：添加依赖项
 
-<img alt="picture 2" src="https://cdn.zb81.icu/4c687674b765dcba0b1333532db886485e8de0d9d06d7578c4122c3e7024056e.png" />  
+<img alt="nodejs" src="./screenshots/nodejs.png" />  
 
 ### 第三步：添加订阅
 
@@ -26,11 +26,11 @@ ql repo https://github.com/zb81/ql-ikuuu.git "checkin|traffic" "" "qlApi|utils"
 
 添加订阅后在定时任务中执行：
 
-<img alt="picture 4" src="https://cdn.zb81.icu/3bde21a7c6e07cd3e757705a3cc23df3c06885fe26579f502a86cfc74e2bbec8.png" />  
+<img alt="tasks" src="./screenshots/tasks.png" />  
 
 ## 通知效果
 
-<img alt="picture 3" src="https://cdn.zb81.icu/cdcb0c957db045c6b5b383d78814f8ce8a4a8ce7775911b4a3450abfeafc3b1e.jpg" />  
+<img alt="dingtalk" src="./screenshots/dingtalk.jpg" />  
 
 
 ## 原理
