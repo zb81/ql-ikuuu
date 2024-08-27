@@ -3,8 +3,8 @@ const axios = require('axios')
 
 const loginURL = 'https://ikuuu.pw/auth/login'
 const infoURL = 'https://ikuuu.pw/user'
-const todayTrafficReg = /今日已用\n.*\s(\d+\.?\d*)([M|G]?B)/
-const restTrafficReg = /剩余流量[\s\S]*<span class="counter">(\d+\.?\d*)<\/span> ([M|G]?B)/
+const todayTrafficReg = /今日已用\n.*\s(\d+\.?\d*)([M|G|K]?B)/
+const restTrafficReg = /剩余流量[\s\S]*<span class="counter">(\d+\.?\d*)<\/span> ([M|G|K]?B)/
 
 function extractArr(envStr) {
   if (typeof envStr === 'string') {
