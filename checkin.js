@@ -2,7 +2,7 @@ const axios = require('axios')
 const { getCookie, getTraffic, getEmailAndPwdList } = require('./utils')
 const notify = require('./sendNotify')
 
-const checkinURL = 'https://ikuuu.pw/user/checkin'
+const checkinURL = 'https://ikuuu.one/user/checkin'
 
 /** 签到 */
 async function checkin(cookie) {
