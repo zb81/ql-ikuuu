@@ -62,17 +62,24 @@ async function getCookie(email, pwd) {
   const formData = new FormData()
   formData.append('email', email)
   formData.append('passwd', pwd)
+  let msg = ''
   try {
     const res = await axios(loginURL, {
       method: 'POST',
       data: formData
     })
     if (res.data.ret === 0) {
-      return `❌ 登录失败：${res.data.msg}`
+      msg = `❌ 登录失败：${res.data.msg}`
+      console.log(msg)
+      return msg
     }
     console.log(`✅ 登录成功：${email}`)
     return res.headers['set-cookie'].join('; ')
-  } catch { }
+  } catch (e) {
+    msg = `❌ 登录失败：${e.message}`
+    console.log(msg)
+    return msg
+  }
 }
 
 /** 获取流量 */
